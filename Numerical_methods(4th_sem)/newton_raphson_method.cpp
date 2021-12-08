@@ -13,11 +13,13 @@ float g(float a)
 int main()
 {
     float x0, x1, allowed_tolerance, calculated_error;
-    int i = 0;
+    int n,i = 0;
     cout << "Enter initial assumption: " << endl;
     cin >> x0;
     cout << "Enter error tolerance: " << endl;
     cin >> allowed_tolerance;
+    cout<<"Enter the number of iterations: "<<endl;
+    cin>>n;
     do
     {
         if (fabs(g(x0)) < allowed_tolerance)
@@ -29,7 +31,7 @@ int main()
         calculated_error = fabs(x0 - x1);
         x0=x1;
         i++;
-        if (i > 20)
+        if (i > n)
         {
             cout << "curve oscillation occurs" << endl;
             exit(1);
