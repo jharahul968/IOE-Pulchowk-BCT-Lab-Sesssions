@@ -17,8 +17,7 @@ int main()
     cin >> error_tolerance;
     allowed_steps = (log(fabs(b - a)) - log(error_tolerance)) / log(2);
     if (func(a) * func(b) >= 0)
-    {
-        cout << "Invalid interval." << endl;
+    {        cout << "Invalid interval." << endl;
         exit(0);
     }
     do
