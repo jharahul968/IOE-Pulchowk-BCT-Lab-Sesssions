@@ -25,7 +25,7 @@ int main()
         if (fabs(g(x0)) < allowed_tolerance)
         {
             cout << "error" << endl;
-            return 1;
+            exit(0);
         }
         x1 = x0 - (f(x0) / g(x0));
         calculated_error = fabs(x0 - x1);
