@@ -1,21 +1,26 @@
 #include <iostream>
 #include <cstring>
+#include <algorithm>
 #include <cstdio>
 #include <stdlib.h>
 #include <conio.h>
-#define size 10
+#include <bits/stdc++.h>
+
+#define sizeT 10
+
 using namespace std;
+
 template<class T>
 class Stack{
     private:
-        T stack[size];
+        T stack[sizeT];
         int top;
     public:
         Stack(){
             top=-1;
         }
         void push(T item){
-            if (top==size-1){
+            if (top==sizeT-1){
                 cout<<"Stack Overflow";
                 getch();
                 exit(1);}
@@ -35,7 +40,7 @@ class Stack{
             return (top==-1);
         }
         bool isFull(){
-            return (top>=(size-1));
+            return (top>=(sizeT-1));
         }
         int giveTop(){
             return stack[top];
@@ -53,13 +58,6 @@ int precedence(char ch){
         return 3;
     else
         return -1;
-}
-string reverse(string infix){
-    string rev;
-    for (int i=0;i<=infix.length();i++){
-        rev[i]=infix[infix.length()-i-1];
-    }
-    return rev;
 }
 string toPostfix(string infix){
     Stack<char> s;
@@ -97,49 +95,58 @@ string toPostfix(string infix){
         }
         return postfix;
     }
-string toPrefix(string infix){
+
+	string toPrefix(string infix){
     Stack<char> s;
     string prefix;
-    infix=reverse(infix);
-    for (int i=0;i<infix.length();i++){
-        if (infix[i]=='(')
-        infix[i]=')';
-        else if (infix[i]==')')
-        infix[i]='(';
+    string temp;
+    for(int i = 0 ; i < infix.size();i++)
+    {
+      temp[i] = infix[infix.size() - i - 1]; 
     }
-    for (int i=0;i<infix.length();i++){
-        if (infix[i]>='a' && infix[i]<='z' || infix[i]>='A' || infix[i]<='Z')
-        prefix+=infix[i];
-        else if (infix[i]=='(')
-        s.push(infix[i]);
-        else if(infix[i]==')'){
-            while((s.giveTop()!='(') && (!s.isEmpty())){
+    for (int i=0;i<temp[i];i++){
+        if ((isdigit(temp[i])) || (infix[i]>='a' && infix[i]<='z' || infix[i]>='A' && infix[i]<='Z'))
+        prefix+=temp[i];
+        else if (temp[i]==')')
+        s.push(temp[i]);
+        else if(temp[i]=='('){
+            while((s.giveTop()!=')') && (!s.isEmpty()))
                 prefix+=s.giveTop();
                 s.pop();
             }
             if (s.giveTop()=='(')
             s.pop();
-            else if(isOperator(infix[i])){
-                if (s.isEmpty())
-                s.push(infix[i]);
-                else if(precedence(infix[i]>precedence(s.giveTop())))
-                s.push(infix[i]);
-                else if(precedence(infix[i]==precedence(s.giveTop())) && (infix[i]=='^'))
-                while((precedence(infix[i])==precedence(s.giveTop())) && (infix[i]=='^'))
-                prefix+=s.pop();
+        else if(isOperator(temp[i])){
+            if (s.isEmpty())
+            s.push(temp[i]);
+            else{
+                if (precedence(temp[i])>precedence(s.giveTop()))
+                s.push(temp[i]);
+                else if(precedence(temp[i]==precedence(s.giveTop())) && temp[i]=='^'){
+                    while(precedence(temp[i] ==precedence(s.giveTop())) && temp[i]=='^'){
+                    prefix+=s.giveTop();
+                    s.pop();
+                    }
+                    s.push(temp[i]);
+                }
+               
+                else {
+                    while((!s.isEmpty())){
+                    prefix+=s.giveTop();
+                    s.pop();
+                }
+                s.push(temp[i]);
             }
-            s.push(infix[i]);
         }
-        else{
-            while((!s.isEmpty()) && (precedence(infix[i]) < precedence(s.giveTop())))
-            prefix+=s.pop();
-            s.push(infix[i]);
         }
     }
-    while(!s.isEmpty())
-    prefix+=s.pop();
-    return reverse(prefix);
-}
+    while(!s.isEmpty()){
+        prefix+=s.giveTop();
+        s.pop();
+    }
+    reverse(prefix.begin(), prefix.end());
+    return (prefix);
+    }
 int main(){
     string infix,postfix,prefix;
     cout<<"Enter Infix Expression: ";
