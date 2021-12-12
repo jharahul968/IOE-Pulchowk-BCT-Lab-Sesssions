@@ -96,57 +96,65 @@ string toPostfix(string infix){
         return postfix;
     }
 
-	string toPrefix(string infix){
-    Stack<char> s;
-    string prefix;
-    string temp;
-    for(int i = 0 ; i < infix.size();i++)
-    {
-      temp[i] = infix[infix.size() - i - 1]; 
+string toPrefix(string infix) {
+  Stack<char> s;
+  string prefix;
+  reverse(infix.begin(), infix.end());
+  for (int i = 0; i < infix.length(); i++) {
+    if (infix[i] == '(') {
+      infix[i] = ')';
+    } else if (infix[i] == ')') {
+      infix[i] = '(';
     }
-    for (int i=0;i<temp[i];i++){
-        if ((isdigit(temp[i])) || (infix[i]>='a' && infix[i]<='z' || infix[i]>='A' && infix[i]<='Z'))
-        prefix+=temp[i];
-        else if (temp[i]==')')
-        s.push(temp[i]);
-        else if(temp[i]=='('){
-            while((s.giveTop()!=')') && (!s.isEmpty()))
-                prefix+=s.giveTop();
-                s.pop();
-            }
-            if (s.giveTop()=='(')
+  }
+  for (int i = 0; i < infix.length(); i++) {
+    if (infix[i] >= 'a' && infix[i] <= 'z' ||
+        infix[i] >= 'A' && infix[i] <= 'Z')
+      prefix.append(std::string(1, infix[i]));
+    else if (infix[i] == '(')
+      s.push(infix[i]);
+    else if (infix[i] == ')') {
+      while ((s.giveTop() != '(') && (!s.isEmpty()))
+        prefix.append(string(1, s.giveTop()));
+      s.pop();
+    }
+    if (s.giveTop() == '(')
+      s.pop();
+    else if (isOperator(infix[i])) {
+      if (s.isEmpty())
+        s.push(infix[i]);
+      else {
+        if (precedence(infix[i]) > precedence(s.giveTop()))
+          s.push(infix[i]);
+        else if (precedence(infix[i] == precedence(s.giveTop())) &&
+                 infix[i] == '^') {
+          while (precedence(infix[i] == precedence(s.giveTop())) &&
+                 infix[i] == '^') {
+            prefix.append(string(1, s.giveTop()));
             s.pop();
-        else if(isOperator(temp[i])){
-            if (s.isEmpty())
-            s.push(temp[i]);
-            else{
-                if (precedence(temp[i])>precedence(s.giveTop()))
-                s.push(temp[i]);
-                else if(precedence(temp[i]==precedence(s.giveTop())) && temp[i]=='^'){
-                    while(precedence(temp[i] ==precedence(s.giveTop())) && temp[i]=='^'){
-                    prefix+=s.giveTop();
-                    s.pop();
-                    }
-                    s.push(temp[i]);
-                }
-               
-                else {
-                    while((!s.isEmpty())){
-                    prefix+=s.giveTop();
-                    s.pop();
-                }
-                s.push(temp[i]);
-            }
+          }
+          s.push(infix[i]);
+        } else if (precedence(infix[i]) == precedence(s.giveTop()))
+          s.push(infix[i]);
+        else {
+          while ((precedence(infix[i]) < precedence(s.giveTop())) &&
+                 (!s.isEmpty())) {
+            prefix.append(string(1, s.giveTop()));
+            s.pop();
+          }
+          s.push(infix[i]);
         }
-        }
+      }
     }
-    while(!s.isEmpty()){
-        prefix+=s.giveTop();
-        s.pop();
-    }
-    reverse(prefix.begin(), prefix.end());
-    return (prefix);
-    }
+  }
+  while (!s.isEmpty()) {
+    prefix.append(std::string(1, s.giveTop()));
+    s.pop();
+  }
+  reverse(prefix.begin(), prefix.end());
+  return (prefix);
+}
+
 int main(){
     string infix,postfix,prefix;
     cout<<"Enter Infix Expression: ";
