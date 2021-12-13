@@ -114,9 +114,10 @@ string toPrefix(string infix) {
     else if (infix[i] == '(')
       s.push(infix[i]);
     else if (infix[i] == ')') {
-      while ((s.giveTop() != '(') && (!s.isEmpty()))
-        prefix.append(string(1, s.giveTop()));
-      s.pop();
+      while ((s.giveTop() != '(') && (!s.isEmpty())) {
+        prefix.append(std::string(1, s.giveTop()));
+        s.pop();
+      }
     }
     if (s.giveTop() == '(')
       s.pop();
@@ -130,7 +131,7 @@ string toPrefix(string infix) {
                  infix[i] == '^') {
           while (precedence(infix[i] == precedence(s.giveTop())) &&
                  infix[i] == '^') {
-            prefix.append(string(1, s.giveTop()));
+            prefix.append(std::string(1, s.giveTop()));
             s.pop();
           }
           s.push(infix[i]);
@@ -139,7 +140,7 @@ string toPrefix(string infix) {
         else {
           while ((precedence(infix[i]) < precedence(s.giveTop())) &&
                  (!s.isEmpty())) {
-            prefix.append(string(1, s.giveTop()));
+            prefix.append(std::string(1, s.giveTop()));
             s.pop();
           }
           s.push(infix[i]);
