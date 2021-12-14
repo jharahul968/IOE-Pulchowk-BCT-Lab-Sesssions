@@ -9,7 +9,8 @@ int main(){
     cin>>n;
     for(int i=0;i<n;i++){
         cout<<"Enter the value of x and y: ";
-        cin>>x[i]>>y[i];
+        cin>>x[i];
+        cin>>y[i];
         sum_x+=x[i];
         sum_y+=y[i];
         sum_xy+=x[i]*y[i];
