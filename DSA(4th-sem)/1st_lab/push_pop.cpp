@@ -17,7 +17,6 @@ class Stack{
         void push(T item){
             if (top==size-1){
                 cout<<"Stack Overflow";
-                getch();
                 exit(1);}
             else{
                 stack[++top]=item;
@@ -26,7 +25,6 @@ class Stack{
         T pop(){
             if (top==-1){
                 cout<<"Stack Underflow";
-                getch();
                 exit(1);}
             else
                 return stack[top--];
@@ -44,7 +42,6 @@ class Stack{
 
 int main(){
     Stack<int> s;
-    int a;
     char c;
     cout<<"Enter only numeric values for entry."<<endl;
     do{
@@ -53,6 +50,7 @@ int main(){
     switch(c){
         case '1':{
         cout<<"Enter item to push."<<endl;
+        int a;
         cin>>a;
         s.push(a);
         break;}
@@ -63,12 +61,19 @@ int main(){
         case '4':{
             cout<<s.isFull()<<endl;
             break;
+            exit(0);
         }
         case '5':{
+        if (s.isEmpty())
+        cout<<"Stack Empty."<<endl;
+        else
         cout<<s.giveTop()<<endl;
         break;
         }
         case '2':{
+            if (s.isEmpty())
+            cout<<"Stack Underflow";
+            else
             cout<<s.pop();
             break;
         }
@@ -76,9 +81,8 @@ int main(){
         exit(1);
         default:
         cout<<"Wrong option"<<endl;
-        getch();
         break;
     }
-    }while(a!='6');
+    }while(c!='6');
     cout<<endl;
 }
