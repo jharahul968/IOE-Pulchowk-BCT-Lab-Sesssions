@@ -33,7 +33,7 @@ class Queue{
     }
     int enqueue(int data){
         if (isFull()){
-            cout<<"Stack Overflow."<<endl;
+            cout<<"Overflow."<<endl;
             exit(1);
         }
         else{

@@ -129,6 +129,7 @@ int main(){
         break;
         case '4':
         cout<<q.viewRear();
+        break;
         case '5':
         cout<<"Enter element to insert at front: "<<endl;
         int cc;
