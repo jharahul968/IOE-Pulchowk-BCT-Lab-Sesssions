@@ -24,7 +24,7 @@ class Queue{
             cout<<"Queue empty."<<endl;
             exit(0);
         }
-        return queue[front];
+        return queue[rear];
     }
     bool isFull(){
         if ((rear==sizeT-1 && front==0) || front==rear+1)
