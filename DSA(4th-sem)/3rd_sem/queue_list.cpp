@@ -2,7 +2,7 @@
 #include <iostream>
 #include <conio.h>
 #include <stdlib.h>
-#define numnodes 5
+#define numnodes 10
 using namespace std;
 
 struct node{
@@ -74,7 +74,7 @@ int main(){
         q.insert(i);
     }
     for (int i=0;i<4;i++){
-        cout<<q.remove();
+        cout<<q.remove()<<endl;
     }
     return 0;
 }
