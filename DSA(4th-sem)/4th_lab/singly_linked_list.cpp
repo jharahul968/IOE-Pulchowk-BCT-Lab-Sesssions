@@ -16,86 +16,159 @@
 #include <conio.h>
 #include <stdlib.h>
 using namespace std;
-
+#define size 100
+template <class T>
 struct node
 {
-    int data;
+    T data;
     struct node *next;
-    struct node* head;
-    node()
-    {
-        head=NULL;
-    }
-
 };
-void insertAtBeginning(struct node* head_ref,int new_data){
-    struct node* new_node=new struct node;
-    new_node->data=new_data;
-    new_node->next=head_ref;
-    head_ref=new_node;
-}
-void insertAfter(struct node* prev_node,int new_data){
-    if (prev_node==NULL){
-        cout<<"Previous node is null."<<endl;
-        return;
-    }
-    struct node* new_node=new struct node;
-    new_node->data=new_data;
-    new_node->next=prev_node->next;
-    prev_node->next=new_node;
-}
-void insertAtEnd(struct node* head_ref,int new_data){
-    struct node* new_node=new struct node;
-    struct node* last=head_ref;
-    new_node->data=new_data;
-    new_node->next=NULL;
-    if (head_ref==NULL){
-        head_ref=new_node;
-        return;
-    }
-    while (last->next!=NULL) last=last->next;
-    last->next=new_node;
-    return;
-}
-void deleteNode(struct node* head_ref,int key){
-    struct node *temp=head_ref,*prev;
-    if (temp!=NULL && temp->data==key){
-        head_ref=temp->next;
-        free(temp);
-        return;
-    }
-    while(temp!=NULL && temp->data!=key){
-        prev=temp;
-        temp=temp->next;
-    }
-    if (temp==NULL) return;
-    prev->next=temp->next;
-    free(temp);
-}
-void printList(struct node* n){
-    cout<<"Linked List: "<<endl;
-    while(n!=NULL){
-        cout<<n->data<<" ";
-        n=n->next;
-    }
-}
-int main(){
-    
+template <class T>
+class LinkedList
+{
+private:
+    node<T> *start;
 
-    struct node n;
-    //insertAtEnd(head,1);
-    // cout<<"here we go"<<endl;
-    insertAtBeginning(n.head,2);
-    cout<<n.head<<endl;
-    // insertAtBeginning(head,3);
-    // cout<<"here we go"<<endl;
-    // insertAtEnd(head,4);
-    // cout<<"here we go"<<endl;
-    // insertAfter(head->next,5);
-    // cout<<"here we go"<<endl;
-    // printList(head);
-    // cout<<"here we go"<<endl;
-    // deleteNode(head,3);
-    printList(n.head);
-    cout<<"here we go"<<endl;
+public:
+    LinkedList()
+    {
+        start = NULL;
+    }
+    void insertAtStart(T item)
+    {
+        node<T> *temp = start;
+        start = new node<T>();
+        start->data = item;
+        start->next = temp;
+    }
+    void deleteAtStart()
+    {
+        node<T> *temp = start;
+        start = start->next;
+        delete temp;
+    }
+    void insertAtEnd(T item)
+    {
+     if (start == NULL)
+    {
+        
+        node<T>*start1 = new node<T>();
+        start1->data=item;
+        start1->next=NULL;
+        start=start1;
+    }
+    else
+    {
+        node<T> *temp = start;
+        node<T> *end = new node<T>();
+        while (temp->next != NULL)
+        {
+            temp = temp->next;
+        }
+        temp->next = end;
+        end->data = item;
+        end->next = NULL;
+    }
+    }
+    void deleteAtEnd()
+    {
+        if (start->next == NULL)
+            deleteAtStart();
+        else
+        {
+            node<T> *temp = start;
+            node<T> *ptr = new node<T>();
+            while (temp->next != NULL)
+            {
+                ptr = temp;
+                temp = temp->next;
+            }
+            ptr->next = NULL;
+            delete temp;
+        }
+    }
+    void insertAfter(T item, T after)
+    {
+        if (!start)
+        {
+            cout << "List Empty." << endl;
+            return;
+        }
+        else
+        {
+            node<T> *temp = start;
+            while (temp->data != after)
+            {
+                temp = temp->next;
+            }
+            if (!temp)
+            {
+                cout << "No such element in list." << endl;
+                return;
+            }
+            node<T> *ptr = temp->next;
+            temp->next = new node<T>();
+            temp->next->data = item;
+            temp->next->next = ptr;
+        }
+    }
+    void deleteAfter(T after)
+    {
+        if (!start)
+        {
+            cout << "List Empty." << endl;
+            return;
+        }
+        node<T> *temp = start;
+        while (temp->data != after)
+        {
+            temp = temp->next;
+        }
+        if (!temp)
+        {
+            cout << "No such element." << endl;
+            return;
+        }
+        temp->next = temp->next->next;
+    }
+    void insertBefore(T item, T before)
+    {
+        if (!start){
+            cout<<"List Empty."<<endl;
+            return;
+        }
+        node<T>* temp=start;
+        node<T>* ptr=start;
+        while(ptr->data!=before){
+            temp=ptr;
+            ptr->next=ptr;
+        }
+        if (!ptr){
+            cout<<"No such element."<<endl;
+            return;
+        }
+        node<T>* n=new node<T>();
+        n.data=item;
+        n.next=ptr;
+        temp->next=n;
+    }
+    void printList(){
+        node<T>* p=start;
+        while(p->next!=NULL)
+        {
+            cout<<p->data<<endl;
+            p=p->next;
+        }
+        cout<<p->data<<endl;
+    }
+};
+int main()
+{
+    LinkedList<int> list;
+    list.insertAtEnd(5);
+    list.insertAtStart(4);
+    list.insertAtStart(1);
+    list.insertAfter(2,1);
+    list.deleteAfter(1);
+    list.printList();
 }
