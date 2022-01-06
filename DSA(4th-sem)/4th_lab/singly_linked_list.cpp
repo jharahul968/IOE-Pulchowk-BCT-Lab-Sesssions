@@ -154,6 +154,7 @@ public:
     }
     void printList(){
         node<T>* p=start;
+        cout << "Linked List items: " << endl;
         while(p->next!=NULL)
         {
             cout<<p->data<<endl;
@@ -166,9 +167,74 @@ int main()
 {
     LinkedList<int> list;
     list.insertAtEnd(5);
+    list.printList();
     list.insertAtStart(4);
+    list.printList();
     list.insertAtStart(1);
+    list.printList();
     list.insertAfter(2,1);
+    list.printList();
     list.deleteAfter(1);
     list.printList();
+    // int choice, num, before, after;
+    // bool quit = 0;
+    // while (quit == 0)
+    // {
+    //     cout << "Press 1 to insert at beginning." << endl;
+    //     cout << "Press 2 to insert before a specific value." << endl;
+    //     cout << "Press 3 to insert after a specific value." << endl;
+    //     cout << "Press 4 to insert at end." << endl;
+    //     cout << "Press 5 to delete at beginning." << endl;
+    //     cout << "Press 6 to delete after a specific value." << endl;
+    //     cout << "Press 7 to delete at end." << endl;
+    //     cout << "Press 8 to display the elements." << endl;
+    //     cout << "Press any other key to quit" << endl;
+    //     cin >> choice;
+
+    //     switch (choice)
+    //     {
+    //     case 1:
+    //         cout << "Enter the number to insert at beginning." << endl;
+    //         cin >> num;
+    //         list.insertAtStart(num);
+    //         break;
+    //     case 2:
+    //         cout << "Enter the number you would like to insert." << endl;
+    //         cin >> num;
+    //         cout << "Enter the number before which you would like to insert the entered number." << endl;
+    //         cin >> before;
+    //         list.insertBefore(num, before);
+    //         break;
+    //     case 3:
+    //         cout << "Enter the number you would like to insert." << endl;
+    //         cin >> num;
+    //         cout << "Enter the number after which you would like to insert the entered number." << endl;
+    //         cin >> after;
+    //         list.insertAfter(num, after);
+    //         break;
+    //     case 4:
+    //         cout << "Enter the number to insert at end." << endl;
+    //         cin >> num;
+    //         list.insertAtEnd(num);
+    //         break;
+    //     case 5:
+    //         list.deleteAtStart();
+    //         break;
+    //     case 6:
+    //         cout << "Enter the value after which you would like to delete." << endl;
+    //         cin >> after;
+    //         list.deleteAfter(after);
+    //         break;
+    //     case 7:
+    //         list.deleteAtEnd();
+    //         break;
+    //     case 8:
+    //         list.printList();
+    //         break;
+    //     default:
+    //         cout << "Terminating the program." << endl;
+    //         quit = 1;
+    //         break;
+    //     }
+    // }
 }
