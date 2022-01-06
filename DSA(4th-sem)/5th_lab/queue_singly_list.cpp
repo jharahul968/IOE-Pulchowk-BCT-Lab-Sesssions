@@ -19,29 +19,31 @@ template <class T>
 class LinkedList
 {
 private:
-    int top;
-    node<T>* topNode;
-    node<T>* start;
+    int front,rear;
+    node<T>* Front;
+    node<T>* Rear;
 
 public:
     LinkedList()
     {
-        topNode=NULL;
-        start=NULL;
-        top = -1;
+        Front=NULL;
+        Rear=NULL;
+        front = -1;
+        rear=-1;
     }
-    void push(T item)
+    void enqueue(T item)
     {
-        if (start==NULL)
+        if (Front==NULL)
         {
             node<T>* start1=new node<T>();
             start1->data=item;
             start1->next=NULL;
-            start=topNode=start1;
-            top++;
+            Front=Rear=start1;
+            front=0;
+            rear++;
             return;
         }
-        node<T> *temp=start;
+        node<T> *temp=Front;
         node<T> *end = new node<T>();
         while(temp->next!=NULL){
             temp=temp->next;
@@ -49,61 +51,52 @@ public:
         temp->next=end;
         end->data=item;
         end->next=NULL;
-        topNode=end;
-        top++;
+        Rear=end;
+        rear++;
     }
-    void pop(){
-        if (top<0){
-            cout<<"Stack Underflow."<<endl;
+    void dequeue(){
+        if (front==-1){
+            cout<<"Queue Empty."<<endl;
             return;
         }
-        if (start==topNode){
-            node<T>* temp=start;
-            start=topNode=NULL;
-            cout<<"Popped Element: "<<temp->data<<endl;
+        if (front==rear){
+            node<T>* temp=Front;
+            Front=Rear=NULL;
+            cout<<"Dequeued Element: "<<temp->data<<endl;
             delete temp;
-            top--;
+            front=rear=-1;
             return;
         }
-        node<T>* temp=start;
-        node<T>* ptr=start;
-        while(temp->next!=NULL){
-            ptr=temp;
-            temp=temp->next;
-        }
-        cout<<"Popped Element: "<<temp->data<<endl;
-        ptr->next=NULL;
-        topNode=ptr;
+        node<T>* temp=Front;
+        node<T>* ptr=Front;
+        cout<<"Dequeued Element: "<<temp->data<<endl;
+        ptr=ptr->next;
+        Front=ptr;
         delete temp;
-        top--;
+        front++;
     }
     void peek(){
-        if (top<0){
-            cout<<"Stack Empty."<<endl;
+        if (front==-1){
+            cout<<"Queue Empty."<<endl;
             return;
         }
-        cout<<"Top Element: "<<topNode->data<<endl;
+        cout<<"Front Element: "<<Front->data<<endl;
     }
     bool isEmpty(){
-        return (top<0);
+        return (front==-1);
     }
     void display(){
-        if (top<0){
-            cout<<"Stack Empty."<<endl;
+        if (front==-1){
+            cout<<"Queue Empty."<<endl;
             return;
         }
-         T arr[top+1];
-         int i=top;
-        node<T>* p=start;
-        cout<<"Stack elements are: "<<endl;
+        node<T>* p=Front;
+        cout<<"Queue elements are: "<<endl;
         while(p->next!=NULL){
-            arr[i--]=p->data;
+            cout<<p->data<<endl;
             p=p->next;
         }
-        arr[i--]=p->data;
-        cout<<"Stack items: "<<endl;
-        for (int j=0;j<=top;j++)
-        cout<<arr[j]<<endl;
+        cout<<p->data<<endl;
     }
 };
 int main()
@@ -113,23 +106,23 @@ int main()
     bool quit = 0;
     while (quit == 0)
     {
-        cout << "Press 1 to push" << endl;
-        cout << "Press 2 to pop." << endl;
-        cout << "Press 3 to check if stack is empty." << endl;
-        cout << "Press 4 to see top element." << endl;
-        cout << "Press 5 to display the stack elements." << endl;
+        cout << "Press 1 to enqueue." << endl;
+        cout << "Press 2 to dequeue." << endl;
+        cout << "Press 3 to check if queue is empty." << endl;
+        cout << "Press 4 to see front element." << endl;
+        cout << "Press 5 to display the queue elements." << endl;
         cout << "Press any other key to quit" << endl;
         cin >> choice;
 
         switch (choice)
         {
         case 1:
-            cout << "Enter the number to push at top." << endl;
+            cout << "Enter the number to enqueue at rear." << endl;
             cin >> num;
-            list.push(num);
+            list.enqueue(num);
             break;
         case 2:
-            list.pop();
+            list.dequeue();
             break;
         case 3:
             cout<<list.isEmpty()<<endl;
