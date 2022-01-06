@@ -301,7 +301,7 @@ int main()
             list.insertAtEnd(num);
             break;
         case 5:
-            list.deleteAtEnd();
+            list.deleteAtStart();
             break;
         case 6:
             cout << "Enter the value after which you would like to delete." << endl;
