@@ -107,6 +107,7 @@ int main()
     cout<<"Enter 5 to add first and second polynomial equations."<<endl;
     cout<<"Enter 6 to view resulting polynomial equation after addition."<<endl;
     cout<<"Enter any other key to terminate the program."<<endl;
+    cout<<"Note: Enter the equation's roots strictly in descending order."<<endl;
     cin>>choice;
     switch(choice){
         case 1:
