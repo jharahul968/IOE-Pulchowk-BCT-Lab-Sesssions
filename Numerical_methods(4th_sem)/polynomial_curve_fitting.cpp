@@ -9,7 +9,7 @@ int main(){
     cin>>n;
     float x[n],y[n];
     for(int i=0;i<n;i++){
-        cout<<"Enter the value of x and y: ";<<endl;
+        cout<<"Enter the value of x and y: "<<endl;
         cin>>x[i];
         cin>>y[i];
     }
