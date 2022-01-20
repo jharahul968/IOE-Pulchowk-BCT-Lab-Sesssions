@@ -12,7 +12,8 @@
 // d. DELETE NODE BEFORE SPECIFIC NODE
 
 #include <iostream>
-#include <conio.h>
+// #include <conio.h>
+#include <curses.h>
 #include <stdlib.h>
 using namespace std;
 #define size 100
