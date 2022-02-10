@@ -9,18 +9,16 @@
 #include <cstdlib>
 using namespace std;
 
-void swap(int *x, int *y){
-    int temp=*x;
-    *x=*y;
-    *y=temp;
-}
-void bubbleSort(int arr[], int n){
-    int i,j;
-    for (i=0;i<n-1;i++){
-        for (j=0;j<n-i-1;j++){
-            if (arr[j]>arr[j+1])
-            swap(&arr[j],&arr[j+1]);
+void insertionSort(int arr[], int n){
+    int i,j,key;
+    for (i=1;i<n;i++){
+        key=arr[i];
+        j=i-1;
+        while(j>=0 && arr[j]>key){
+            arr[j+1]=arr[j];
+            j=j-1;
         }
+        arr[j+1]=key;
     }
 }
 void printArr(int arr[],int size){
@@ -34,7 +32,7 @@ void printArr(int arr[],int size){
 int main(){
     int arr[]={5,424,43,21,4,43,52,2,2};
     int n=sizeof(arr)/sizeof(arr[0]);
-    bubbleSort(arr,n);
+    insertionSort(arr,n);
     cout<<"Sorted Array: "<<endl;
     printArr(arr,n);
 }
