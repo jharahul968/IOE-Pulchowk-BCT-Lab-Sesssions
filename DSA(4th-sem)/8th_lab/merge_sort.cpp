@@ -21,9 +21,8 @@ void printArr(int arr[],int size){
     }
     cout<<endl;
 }
-void partition(int arr[], int low, int high){
-}
-void mergeSort(int arr[], int low, int high){
+
+void mergeSort(int arr[], int n){
 }
 
 int main(){

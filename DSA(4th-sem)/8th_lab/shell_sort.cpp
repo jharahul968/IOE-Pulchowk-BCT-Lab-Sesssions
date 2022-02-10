@@ -9,11 +9,6 @@
 #include <cstdlib>
 using namespace std;
 
-void swap(int *x, int *y){
-    int temp=*x;
-    *x=*y;
-    *y=temp;
-}
 void printArr(int arr[],int size){
     int i;
     for (i=0;i<size;i++){
@@ -21,9 +16,16 @@ void printArr(int arr[],int size){
     }
     cout<<endl;
 }
-void partition(int arr[], int low, int high){
-}
-void shellSort(int arr[], int low, int high){
+void shellSort(int arr[], int n){
+    for (int gap=n/2;gap>0;gap/=2){
+        for (int i=gap;i<n;i++){
+            int temp=arr[i];
+            int j;
+            for (j=i;j>=gap && arr[j-gap]>temp;j-=gap)
+            arr[j]=arr[j-gap];
+            arr[j]=temp;
+        }
+    }
 }
 
 int main(){
