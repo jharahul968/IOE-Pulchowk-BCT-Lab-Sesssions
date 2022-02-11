@@ -21,7 +21,20 @@ void printArr(int arr[],int size){
     }
     cout<<endl;
 }
-void partition(int arr[], int low, int high){
+void merge(int arr[], int const left, int const mid, int const right){
+    int const subArrayOne=mid-left+1;
+    int const subArrayTwo=right-mid;
+    int *leftArray=new int[subArrayOne];
+    int *rightArray=new int[subArrayTwo];
+    for (int i=0;i<subArrayOne;i++){
+        leftArray[i]=arr[left+i];
+    }
+    for (int i=0;i<subArrayTwo;i++){
+        leftArray[i]=arr[mid+1+i];
+    }
+    int subArrayOneIndex=0;
+    int subArrayTwoIndex=0;
+    int mergedArrayIndex=left;
 }
 void mergeSort(int arr[], int low, int high){
 }
