@@ -21,7 +21,6 @@ void printArr(int arr[],int size){
     }
     cout<<endl;
 }
-<<<<<<< HEAD
 void merge(int arr[], int const left, int const mid, int const right){
     int const subArrayOne=mid-left+1;
     int const subArrayTwo=right-mid;
@@ -38,10 +37,6 @@ void merge(int arr[], int const left, int const mid, int const right){
     int mergedArrayIndex=left;
 }
 void mergeSort(int arr[], int low, int high){
-=======
-
-void mergeSort(int arr[], int n){
->>>>>>> 890f83064258ce20591cc6f0d151fbfb1dbd83a9
 }
 
 int main(){
