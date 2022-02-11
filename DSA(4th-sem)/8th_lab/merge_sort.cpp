@@ -9,11 +9,6 @@
 #include <cstdlib>
 using namespace std;
 
-void swap(int *x, int *y){
-    int temp=*x;
-    *x=*y;
-    *y=temp;
-}
 void printArr(int arr[],int size){
     int i;
     for (i=0;i<size;i++){
@@ -21,11 +16,11 @@ void printArr(int arr[],int size){
     }
     cout<<endl;
 }
-void merge(int arr[], int const left, int const mid, int const right){
-    int const subArrayOne=mid-left+1;
-    int const subArrayTwo=right-mid;
-    int *leftArray=new int[subArrayOne];
-    int *rightArray=new int[subArrayTwo];
+void merge(int arr[], int left, int mid, int right){
+    int subArrayOne=mid-left+1;
+    int subArrayTwo=right-mid;
+    int leftArray[subArrayOne];
+    int rightArray[subArrayTwo];
     for (int i=0;i<subArrayOne;i++){
         leftArray[i]=arr[left+i];
     }
@@ -35,14 +30,41 @@ void merge(int arr[], int const left, int const mid, int const right){
     int subArrayOneIndex=0;
     int subArrayTwoIndex=0;
     int mergedArrayIndex=left;
+    while (subArrayOneIndex<subArrayOne && subArrayTwoIndex<subArrayTwo){
+        if (leftArray[subArrayOneIndex]<=rightArray[subArrayTwoIndex]){
+            arr[mergedArrayIndex]=leftArray[subArrayOneIndex];
+            subArrayOneIndex++;
+        }
+        else{
+            arr[mergedArrayIndex]=rightArray[subArrayTwoIndex];
+            subArrayTwoIndex++;
+        }
+        mergedArrayIndex++;
+    }
+    while (subArrayOneIndex<subArrayOne){
+        arr[mergedArrayIndex]=leftArray[subArrayOneIndex];
+        subArrayOneIndex++;
+        mergedArrayIndex++;
+    }
+    while (subArrayTwoIndex<subArrayTwo){
+        arr[mergedArrayIndex]=rightArray[subArrayTwoIndex];
+        subArrayTwoIndex++;
+        mergedArrayIndex++;
+    }
 }
-void mergeSort(int arr[], int low, int high){
+void mergeSort(int arr[], int begin, int end){
+    if (begin<end){
+    int mid=begin+(end-begin)/2;
+    mergeSort(arr,begin,mid);
+    mergeSort(arr,mid+1,end);
+    merge(arr,begin,mid,end);
+    }
 }
 
 int main(){
     int arr[]={5,424,43,21,4,43,52,2,2};
     int n=sizeof(arr)/sizeof(arr[0]);
-    mergeSort(arr,n);
+    mergeSort(arr,0,n-1);
     cout<<"Sorted Array: "<<endl;
     printArr(arr,n);
 }
