@@ -11,22 +11,24 @@ using namespace std;
 
 void printArr(int arr[],int size){
     int i;
-    for (i=0;i<size;i++){
+    for (i=0;i<size;i++)
         cout<<arr[i]<<" ";
-    }
     cout<<endl;
 }
+
 void merge(int arr[], int left, int mid, int right){
     int subArrayOne=mid-left+1;
     int subArrayTwo=right-mid;
     int leftArray[subArrayOne];
     int rightArray[subArrayTwo];
-    for (int i=0;i<subArrayOne;i++){
+
+    for (int i=0;i<subArrayOne;i++)
         leftArray[i]=arr[left+i];
-    }
-    for (int i=0;i<subArrayTwo;i++){
-        leftArray[i]=arr[mid+1+i];
-    }
+    
+    for (int j=0;j<subArrayTwo;j++)
+        leftArray[j]=arr[mid+1+j];
+    
+
     int subArrayOneIndex=0;
     int subArrayTwoIndex=0;
     int mergedArrayIndex=left;
@@ -62,7 +64,7 @@ void mergeSort(int arr[], int begin, int end){
 }
 
 int main(){
-    int arr[]={5,424,43,21,4,43,52,2,2};
+    int arr[]={1,2,3,4,5,6,7,8,9,10};
     int n=sizeof(arr)/sizeof(arr[0]);
     mergeSort(arr,0,n-1);
     cout<<"Sorted Array: "<<endl;
