@@ -43,7 +43,10 @@ void countSort(int arr[], int n, int exp){
     for (i=0;i<n;i++)
     arr[i]=output[i];
 }
-void radixSort(int arr[], int low, int high){
+void radixSort(int arr[], int n){
+    int max=getMax(arr,n);
+    for (int e=1;max/e>0;e*=10)
+    countSort(arr,n,e);
 }
 
 int main(){
