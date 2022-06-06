@@ -1,5 +1,0 @@
-Data of student 1
-Name: ram
-Roll Number: 1
-Address: kathmandu
-Phone Number: 9876543210

@@ -1,0 +1,5 @@
+                             Jha Pvt Ltd
+S.N.Subject Name        Quantity  Price Sub-Total 
+1   Book                5         1200  6000      
+1   Copy                20        200   4000      
+total                             10000     
