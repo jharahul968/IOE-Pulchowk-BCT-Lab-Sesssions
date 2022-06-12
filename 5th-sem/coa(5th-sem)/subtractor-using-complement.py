@@ -14,6 +14,8 @@ def OR(input1, input2):
     else:
         return 0
 
+
+
 class adder:
     def Sum(self, a, b, c):
         return XOR(XOR(a,b),c)
@@ -57,15 +59,16 @@ class nBitAdder(adder):
 if __name__=="__main__":
     size=input("Enter the size of bit adder: ")
     input1=input("Enter the first number: ")
-    print(type('1'))
-    for i in input1:
-        if (i != '1') or (i != '0'):
-            print("Error Input! Please enter in binary form (only 1 and 0)")
-            quit()
+
     input2=input("Enter the second number: ")
-    for i in input2:
-        if (int(i) != 1) or (int(i) != 0):
-            print("Error Input! Please enter in binary form (only 1 and 0)")
-            quit()
+    input2=input2.zfill(int(size))
+    input2=input2.replace('1','x')
+    input2=input2.replace('0','1')
+    input2=input2.replace('x','0')
+    bitAdder=nBitAdder(int(size))
+    sum1,carry1=bitAdder.result(int(input2),1)
+    input2=sum1
+
+
     bitAdder=nBitAdder(int(size))
     print("The result is in the form (sum,carry): ", bitAdder.result(int(input1),int(input2)))
