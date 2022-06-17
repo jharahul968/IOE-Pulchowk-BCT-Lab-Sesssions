@@ -33,7 +33,6 @@ for i in range(n-1):
 
 
     a=str(sub.result(int(a),int(m))[0])
-    print("result=",a)
     a=a.zfill(n)
     
     if a[0]=='1':

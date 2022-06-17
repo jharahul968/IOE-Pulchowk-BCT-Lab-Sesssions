@@ -26,28 +26,44 @@ a=""
 n=len(q)+1
 
 a=a.zfill(n)
-m=m.zfill(n)
+m0=m.zfill(n)
 
 
 for i in range(n-1):
-    a,q=leftShift(a,q)
+    if str(a[0])=='1':
+        a,q=leftShift(a,q)
+        sub=nBitSubtractor(n)
+        m=getCmp(m0,0)
+        a=str(sub.result(int(a),int(m))[0])
+ 
+        a=a.zfill(n)
+        if a[0]=='1':
+            q=list(q)
+            q[-1]='0'
+            q="".join(q)
+        elif a[0]=='0':
+            q=list(q)
+            q[-1]='1'
+            q="".join(q)
 
+    elif str(a[0])=='0':
+        a,q=leftShift(a,q)
+        sub=nBitSubtractor(n)
+        m=getCmp(m0,1)
+        a=str(sub.result(int(a),int(m))[0])
+        a=a.zfill(n)
+        if a[0]=='1':
+            q=list(q)
+            q[-1]='0'
+            q="".join(q)
+        elif a[0]=='0':
+            q=list(q)
+            q[-1]='1'
+            q="".join(q)
+
+if str(a[0])=='1':
     sub=nBitSubtractor(n)
-    tempA=a
-
     a=str(sub.result(int(a),int(m))[0])
-    print("result=",a)
-    a=a.zfill(n)
-    
-    if a[0]=='1':
-        q=list(q)
-        q[-1]='0'
-        q="".join(q)
-        a=tempA
-    elif a[0]=='0':
-        q=list(q)
-        q[-1]='1'
-        q="".join(q)
 
 
 print("Quotient is ", int(q))
