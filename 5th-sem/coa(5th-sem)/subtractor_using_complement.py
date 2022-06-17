@@ -22,7 +22,7 @@ class adder:
     def Carry(self, a, b, c):
         return OR(OR(AND(a,b), AND(b,c)),AND(c,a))
 
-class nBitAdder(adder):
+class nBitSubtractor(adder):
     def __init__(self, n):
         super().__init__()
         self.n=n
@@ -65,10 +65,10 @@ if __name__=="__main__":
     input2=input2.replace('1','x')
     input2=input2.replace('0','1')
     input2=input2.replace('x','0')
-    bitAdder=nBitAdder(int(size))
-    sum1,carry1=bitAdder.result(int(input2),1)
+    bitSubtractor=nBitSubtractor(int(size))
+    sum1,carry1=bitSubtractor.result(int(input2),1)
     input2=sum1
 
 
-    bitAdder=nBitAdder(int(size))
-    print("The result is in the form (sum,carry): ", bitAdder.result(int(input1),int(input2)))
+    bitAdder=nBitSubtractor(int(size))
+    print("The result is in the form (sum,carry): ", bitSubtractor.result(int(input1),int(input2)))
