@@ -70,4 +70,5 @@ while(sc!=0):
 
         sc-=1
 
+ac=str(ac)+str(qr)
 print("Result is: ",ac)
